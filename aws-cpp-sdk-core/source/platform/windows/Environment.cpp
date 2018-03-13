@@ -41,7 +41,7 @@ Aws::String GetEnv(const char *variableName)
         free(variableValue);
     }
 #else
-    Aws::String result = std::getenv(variablename);
+    Aws::String result = std::getenv(variableName);
 #endif
     return result;
 }

@@ -29,6 +29,7 @@ that would need to be manually freed in all the client functions, just copy it i
 */
 Aws::String GetEnv(const char *variableName)
 {
+#ifdef _MSC_VER
     char* variableValue = nullptr;
     std::size_t valueSize = 0;
     auto queryResult = _dupenv_s(&variableValue, &valueSize, variableName);
@@ -39,7 +40,9 @@ Aws::String GetEnv(const char *variableName)
         result.assign(variableValue, valueSize - 1);  // don't copy the c-string terminator byte
         free(variableValue);
     }
-
+#else
+    Aws::String result = std::getenv(variablename);
+#endif
     return result;
 }
 

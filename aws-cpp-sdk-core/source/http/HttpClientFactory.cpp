@@ -18,12 +18,17 @@
 #if ENABLE_CURL_CLIENT
 #include <aws/core/http/curl/CurlHttpClient.h>
 #include <signal.h>
+#ifndef SIGPIPE
+#define SIGPIPE 13
+#endif
 
 #elif ENABLE_WINDOWS_CLIENT
+#error "Please force libcurl"
 #include <aws/core/client/ClientConfiguration.h>
 #if ENABLE_WINDOWS_IXML_HTTP_REQUEST_2_CLIENT
 #include <aws/core/http/windows/IXmlHttpRequest2HttpClient.h>
 #else
+#error "Please force libcurl"
 #include <aws/core/http/windows/WinINetSyncHttpClient.h>
 #include <aws/core/http/windows/WinHttpSyncHttpClient.h>
 #endif

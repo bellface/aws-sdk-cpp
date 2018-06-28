@@ -2770,7 +2770,11 @@ Aws::String S3Client::ComputeEndpointString(const Aws::String& bucket) const
     }
     else
     {
+      if (bucket.empty()) {
+        ss << m_scheme << "://" << m_baseUri;
+      } else {
         ss << m_scheme << "://" << m_baseUri << "/" << bucket;
+      }
     }
     return ss.str();
 }
